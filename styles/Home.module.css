@@ -1,0 +1,39 @@
+.header {
+  text-align: center;
+  padding: 2rem 0;
+  background-color: #bbdefb;
+}
+
+.light {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+  color: #607d8b;
+}
+
+.split {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem;
+}
+
+.left {
+  width: 25%;
+}
+.left > pre {
+  width: 90%;
+}
+.right {
+  width: 75%;
+}
+
+@media only screen and (max-width: 1024px) {
+  .left {
+    width: 100%;
+  }
+  .left pre {
+    width: 100%;
+  }
+  .right {
+    width: 100%;
+  }
+}
