@@ -41,7 +41,7 @@ export default function Home() {
   if (loading) {
     return (
       <header className={styles.header}>
-        <h1>Leigh Halliday</h1>
+        <h1>Sthefano Carvalho</h1>
         <h2>loading...</h2>
       </header>
     );

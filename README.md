@@ -1,13 +1,19 @@
-# Gerador de imagens placeholder
+# GraphQL Resumé with Next.Js, Apollo Server and Nexus Schema
 
-Um gerador de imagens placeholder construído com Javascript, CSS e HTML.
-Com o input do usuário, é possível selecionar as dimensões de uma imagem (width e height) e, com isso, gerar uma URL no canva para poder utilizar como _src_ nas tags <img> em sites que construímos.
+Personal GraphQL API to be used to build resumés online.
+This is built using **Next.Js** and for the schema, **Nexus Schema**.
+It is possible to access all the information using the **GraphQL API**, that comes with its playground as seen on the image below.
+
+The API can be used by anyone on the deployed link:
+<a href="https://graphqlresume.sthefanoc.com">production app</a>
 
 ### Preview:
 
-<div style="text-align:center"><a href="https://dev-pratico.github.io/projeto-gerador_de_imgs_placeholder/" target="_blank"><img height="400" src="assets/imgs_placeholder.GIF" title="Placeholder images" alt="Project Placeholder Images" /></a></div>
+<div style="text-align:center"><a href="https://dev-pratico.github.io/projeto-gerador_de_imgs_placeholder/" target="_blank"><img height="400" src="assets/imgs_placeholder.GIF" title="GraphQL resume" alt="Project Placeholder Images" /></a></div>
 
-### Tecnologias utilizadas:
+### Technologies involved:
+
+GraphQL, NextJS, Nexus Schema, Typescript
 
 <div>
   <code><img height="20" alt="HTML5" src="https://img.shields.io/badge/html5%20-%23E34F26.svg?&style=for-the-badge&logo=html5&logoColor=white"/></code>
@@ -17,300 +23,572 @@ Com o input do usuário, é possível selecionar as dimensões de uma imagem (wi
 
 ---
 
-## Passo-a-passo
+## Step-by-step
 
-### Criar HTML inicial
+### Backend
 
-Utilizando o atalho da extensão para VSCode, criar o HTML inicial.
-Em seguida, trocar o título do site (**<img> Generator**) e acrescentar tags para o arquivo CSS (**style.css**) e o JS(**script.js**):
+We will start from the backend, so we know exactly how to power our app.
 
-```HTML
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title> <img> Generator</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <script src="script.js"></script>
-    </body>
-    </html>
+To start the project, we will use **npx** to bootstrap the initial build of the **NextJS** app, called "graphql-resume":
+
+```
+    npx create-next-app graphql-resume
 ```
 
-### Criação de funções no script.js
+Now we have a basic structure of a NextJs application. The first step will be to rename the _hello.js_ to _graphql.ts_.
 
-A principal funcionalidade da aplicação é criar uma função que recebe dois parâmetros em formato de número, width e height (largura e altura) e retorna uma HTML Element Canvas, o qual terá uma URL reutilizável e poderá ser mostrado na tela.
-Vamos começar por essa função, chamada **createPlaceholderCanvas**, a qual deve seguir os passos:
+Next step will be adding our dependencies:
 
-1. Criar elemento <canvas>
-2. Estabelecer contexto com "2d"
-3. Atribuir as dimensões (_width_ e _height_) ao elemento
-4. Preencher o elemento com uma cor pré-determinada, utilizando `fillStyle`
-5. Estabelecer onde o retângulo será desenhado utilizando `fillRect`
-6. Retornar o elemento
+```
+    yarn add @nexus/schema apollo-server-micro date-fns graphql graphql-scalars micro
+```
 
-O código final deve ficar assim:
+Here is the reason why we are using each one of those:
+
+- **@nexus/schema**: to build the schema and resolvers all in one
+- **apollo-server-micro**: normally it would be just an Apollo Server, but since it is inside a NextJS application, we use the micro version
+- **date-fns**: to calculate difference between dates (related to the jobs)
+- **graphql**: required by Apollo Server
+- **graphql-scalars**: to define custom scalars types
+- **micro**: needed to integrate Apollo Server to the app
+
+After installing those, we add two more dependencies for TypeScript:
+
+```
+    yarn add --dev @types/react typescript
+```
+
+After that, we can start the application:
+
+```
+    yarn dev
+```
+
+By default, the NextJS application boiler plate will start on the port 3000 ([http://localhost:3000/](http://localhost:3000/)).
+
+Since we will start from the backend, we will not do much of this part right now.
+
+Inside the `graphql.ts` file (pages > api > graphql.ts), we will start by deleting everything and starting the ApolloServer, the micro version. To start, we will follow the steps:
+
+1. Import ApolloServer form _apollo-server-micro_
+2. Create the server
+3. Create a handler
+4. Export the handler
+
+In the end, the file will look like this:
 
 ```javascript
-function createPlaceholderCanvas(width, height) {
-  const element = document.createElement('canvas');
-  const context = element.getContext('2d');
+import { ApolloServer } from 'apollo-server-micro';
 
-  element.width = width;
-  element.height = height;
+const server = new ApolloServer({});
+const handler = server.createHandler({ path: '/api/graphql' });
 
-  // Background
-  context.fillStyle = '#aaaaaa';
-  context.fillRect(0, 0, element.width, element.height);
-
-  return element;
-}
-
-document.body.appendChild(createPlaceholderCanvas(300, 200));
+export default handler;
 ```
 
-Com esse código, já deve ser possível visualizar o retângulo numa coloração cinza na tela.
-Em seguida, vamos desenhar o texto dentro do retângulo. Os seguintes passos serão seguidos:
+Now, for the graphql api endpoint to work, we will neeed to add some types, since Apollo Server requires either an existing schema, modules or typeDefs.
 
-1. Determinar o tamanho da fonte de acordo com o tamanho da imagem. Para isso, vamos buscar o menor parâmetro entre os dois da função (width e height) e inserir uma fonte proporcional
-2. Determinar a fonte utilizando `context.font`
-3. Determinar preenchimento do texto com `fillStyle`
-4. Alinhar texto com `textAlign`
-5. Determinar o alinhamento da base do texto com `textBaseline`
-6. Realizar o preenchimento do texto de acordo com os parâmetros das dimensões, utilizando `fillText`
+Using [Apollo Docs](https://www.apollographql.com/docs/apollo-server/getting-started/) as reference, we can create types and resolvers.
+The steps to be followed are:
 
-O código final da função deve ficar assim:
+1. Import "schema" (a file that doesn't exist yet) from "src/schema"
+2. Create the schema.ts file in the folder
+3. Pass "schema" as an argument to the server
+4. Add a "baseUrl" property to the tsconfig file, so we can import things directly from the "." and not have to create long paths on imports
+
+The api file will have these lines now:
 
 ```javascript
-function createPlaceholderCanvas(width, height) {
-  const element = document.createElement("canvas");
-  const context = element.getContext("2d");
+import { schema } from 'src/schema';
 
-  element.width = width;
-  element.height = height;
-
-  // Fill in the background
-  context.fillStyle = "#aaaaaa";
-  context.fillRect(0, 0, element.width, element.height);
-
-  // Place the text
-  const lowestDimension = Math.min(Number(inputWidth.value), Number(inputHeight.value))
-  const fontSize = Math.trunc(lowestDimension/4.5)
-
-  context.font = `bold ${fontSize}px sans-serif`;
-  context.fillStyle = "#333333";
-  context.textAlign = "center";
-  context.textBaseline = "middle";
-  context.fillText(`${width}x${height}`, element.width / 2, element.height / 2);
-
-  return element;
+const server = new ApolloServer({ schema });
 ```
 
-### Criação dos elementos HTML
+Now, on the `schema.ts` file, we will:
 
-Com a funcionalidade principal criada, vamos seguir com a criação do layout.
-Para isso, vamos seguir os passos:
+1. Import "makeSchema" from "@nexus/schema"
+2. Export const schema using the method imported
+3. Pass types
+4. Import \* as types from "./allTypes" (that doesn't exist yet, but we will create a folder and a index.ts file to follow)
 
-1. Criar título
-2. Criar inputs para as dimensões, além de um botão para gerar a imagem
-3. Criar input que vai nos trazer a URL do Canvas e um botão para copiar para a área de transferência
-4. Mostrar preview da imagem, inicialmente com "display: none"
-
-O código final deve ficar próximo do abaixo:
-
-```HTML
-<body>
-    <h1>Gerador de imagens placeholder</h1>
-    <h3>Dimensões</h3>
-    <div class="dimensions">
-        <input type="number" class="input" id="inputWidth" value="500">
-        x
-        <input type="number" class="input" id="inputHeight" value="400">
-        <button id="buttonGenerate" type="button" title="Gerar imagem placeholder com dimensões personalizadas.">Gerar</button>
-    </div>
-    <h3>Data URL</h3>
-    <div class="data-url">
-        <input type="text" class="input" id="inputDataUrl" placeholder="Gere uma imagem acima para criar uma url!" readonly>
-        <img id="buttonCopy" width="20" height="20" src="assets/copy-link.svg" alt="Copy to clipboard" title="Copiar para Área de Transferência">
-    </div>
-
-    <h3 style="display: none" id="titlePreview">Preview</h3>
-    <img alt="Preview Image" id="imagePreview" style="display: none">
-    <script src="script.js"></script>
-</body>
-```
-
-### Estilização dos elementos usando CSS
-
-A estilização pode ser dividida em 4 partes:
-
-- **Geral**: onde centralizamos os elementos, escolhemos as fontes, entre outros
-- **Input**: estilização das caixas de texto e botão, com efeito hover
-- **Input**: data URL e posicionamento do ícone para copiar para a área de transferência
-- **Preview da imagem**: que vai ter um inline style de "display:none" e será removido com uma função CSS. Além disso, o tamanho da imagem Canvas não pode ser limitado pelo CSS, por isso, "position: absolute".
-
-Os estilos devem ficar próximos disso:
-
-```CSS
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  margin: auto;
-  width: 50%;
-}
-
-.input {
-  height: 30px;
-  box-sizing: border-box;
-}
-
-#inputWidth,
-#inputHeight {
-  width: 80px;
-}
-
-#buttonGenerate {
-  height: 28px;
-  border-radius: 10%;
-  transition: all 0.2s;
-}
-#buttonGenerate:hover {
-  cursor: pointer;
-  transform: scale(1.1);
-}
-
-.data-url {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-}
-
-.data-url img {
-  margin-left: 5px;
-  align-self: center;
-}
-.data-url img:hover {
-  cursor: pointer;
-  transform: scale(1.1);
-}
-
-.data-url img:hover {
-  cursor: pointer;
-  transform: scale(1.1);
-}
-
-.data-url img:focus {
-  transform: scale(1.2);
-}
-
-#inputDataUrl {
-  width: 100%;
-  max-width: 600px;
-}
-
-#imagePreview {
-  width: 100%;
-  position: absolute;
-}
-```
-
-### Adicionando funcionalidade à interface
-
-De volta ao arquivo **script.js**, vamos criar mais duas funcionalidades: gerar o canvas e copiar código final para clipboard.
-O primeiro passo será identificar quais são os elementos sendo utilizados pela página.
-No topo do arquivo, algo assim:
+Now the file will look like this:
 
 ```javascript
-const inputWidth = document.getElementById('inputWidth');
-const inputHeight = document.getElementById('inputHeight');
-const inputDataUrl = document.getElementById('inputDataUrl');
-const imagePreview = document.getElementById('imagePreview');
-const titlePreview = document.getElementById('titlePreview');
-```
+import { makeSchema } from '@nexus/schema';
+import * as types from './allTypes';
 
-Para criar a funcionalidade de gerar o elemento canvas, devemos seguir os seguintes passos:
-
-1. Identificar o botão e acrescentar um eventListener com `addEventListener` do tipo `click`
-2. Criar validações: se o input não for número ou for abaixo de 200px, a função deve mostrar um alerta
-3. Utilizar os valores do input na função **createPlaceholderCanvas**
-4. Buscar DataURL no canvas element
-5. Atualizar a _src_ na imagem de preview
-6. Remover o estilo "display:none" no preview
-
-O código final deve ficar assim:
-
-```javascript
-document.getElementById('buttonGenerate').addEventListener('click', () => {
-  const MIN_SIDE_LENGTH = 200;
-
-  // Validation
-  if (
-    isNaN(inputWidth.value) ||
-    isNaN(inputHeight.value) ||
-    inputWidth.value < MIN_SIDE_LENGTH ||
-    inputHeight.value < MIN_SIDE_LENGTH
-  ) {
-    alert(
-      `Ops. Tamanho de imagem inválido. O tamanho mínimo é de ${MIN_SIDE_LENGTH}px`
-    );
-    return;
-  }
-
-  const canvasElement = createPlaceholderCanvas(
-    inputWidth.value,
-    inputHeight.value
-  );
-  const dataUrl = canvasElement.toDataURL();
-
-  inputDataUrl.value = dataUrl;
-  imagePreview.src = dataUrl;
-  imagePreview.style.display = 'block';
-  titlePreview.style.display = 'block';
-  imagePreview.style.maxWidth = `${inputWidth.value}px`;
+export const schema = makeSchema({
+  types,
 });
 ```
 
-A seguir, vamos criar a função para colar o código na área de transferência do usuário.
-Para isso, vamos seguir os seguintes passos:
-
-1. Verificar se a imagem já foi gerada
-2. Identificar e selecionar o elemento na página, utilizando `select` e `setSelectionRange` (para mobile)
-3. Executar o comando de copiar com `execCommand('copy')`
-
-O código final deve ficar assim:
+The next step will be creating the files inside the "allTypes" folder, starting by the `Query.ts`. Query is kind of the top level data type, the root type, sometimes. For this file we will import the "queryType" and export this information.
+The file will look like this:
 
 ```javascript
-document.getElementById('buttonCopy').addEventListener('click', () => {
-  if (inputDataUrl.value) {
-    inputDataUrl.select();
-    inputDataUrl.setSelectionRange(0, 99999);
+import { queryType } from '@nexus/schema';
 
-    document.execCommand('copy');
-
-    alert(
-      `Copiado para a área de transferência!\n\nURL:\n${inputDataUrl.value}`
-    );
-  } else {
-    alert('Gere a imagem para poder copiar para a área de transferência.');
-  }
+export const Query = queryType({
+  definition(t) {
+    t.string('name', () => 'Sthefano');
+  },
 });
 ```
+
+And finally, inside the `index.ts` file we will import and export the Query. The file will look like this:
+
+```javascript
+export * from './Query';
+```
+
+Now, back at the `graphql.ts` file, we will need to add an export to a config that toggles "bodyParser" as false, so it loads our requests. That part looks like this:
+
+```javascript
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+```
+
+After that, the API is working!
+Now it's the time to add data to it :)
+
+This data will be added to a file named `data.ts`, which is basically going to have all the information provided by our API.
+The complete file can be seen here, [inside this repo]("src/data.ts"). The structure is something like this:
+
+```javascript
+export const data = {
+  bio: {
+    name: 'Sthefano Carvalho',
+    tagline: 'Full Stack Developer',
+    email: 'sthefano@masteradin.com',
+    github: 'https://github.com/sthefanoc',
+    website: 'https://www.sthefanoc.com',
+    linkedin: 'https://linkedin.com/in/sthefanocarvalho',
+    objective: 'Build amazing tools with the best technologies.',
+  },
+  skills: ['Python', 'Javascript', 'HTML', 'CSS', 'ReactJS', 'NodeJS'],
+  positions: [
+    {
+      id: '1',
+      title: 'Full Stack Developer',
+      company: 'SthefanoC.com',
+      startDate: '2020-01-01',
+      endDate: null,
+      employmentType: 'PART_TIME',
+      location: 'São Paulo, Brazil',
+      achievements: [
+        'Automation Tools Development using Python, deploying scripts on Heroku, Google Cloud Platform and Python Anywhere',
+        'Website development using HTML, CSS and Javascript, deploying on Github Pages, Netlify and cPanel hosting platforms',
+        'Frontend Development using ReactJs, GatsbyJS and NextJS for interface, Redux for state management',
+        'Backend Development using NodeJs, Express, Django, Flask and Firebase',
+        'Mobile Development using Hybrid App Development technologies, such as React Native and PWA',
+      ],
+    },
+    {
+      id: '2',
+      title: 'Managing Director | Co-founder',
+      company: 'Masteradin',
+      startDate: '2018-11-01',
+      endDate: null,
+      employmentType: 'FULL_TIME',
+      location: 'São Paulo, Brazil',
+      achievements: [
+        'Process Automation using Selenium',
+        'E-commerce website performance evaluation: technical and strategic'
+        'Business Analysis using Growth Hacking Techniques',
+        'SEM (Google Ads), SEO (Content and Tech), Backlink Acquisition, Social Media (WhatsApp & Instagram)',
+      ],
+    },
+    {
+      id: '3',
+      title: 'Customer Development Analyst',
+      company: 'Unilever',
+      startDate: '2015-01-01',
+      endDate: '2018-09-01',
+      employmentType: 'FULL_TIME',
+      location: 'São Paulo, Brazil',
+      achievements: [
+        'Website implementation',
+        'Contract Management',
+        'Investment Analysis',
+        'Financial Management',
+        'Training and Team Leadership'
+      ],
+    },
+    {
+      id: '4',
+      title: 'Customer Development Analyst',
+      company: 'Unilever',
+      startDate: '2014-02-01',
+      endDate: '2015-02-01',
+      employmentType: 'FULL_TIME',
+      location: 'São Paulo, Brazil',
+      achievements: [
+        'Performance KPI\'s',
+        'Financial Management',
+        'Strategy and relationship with Distributors',
+        'Innovation Planning'
+      ],
+    },
+    {
+      id: '5',
+      title: 'Marketing Intern',
+      company: 'Unilever',
+      startDate: '2012-01-01',
+      endDate: '2013-12-01',
+      employmentType: 'FULL_TIME',
+      location: 'São Paulo, Brazil',
+      achievements: [
+        'Responsible for organizing events and store promotional campaigns and programs.',
+        'Responsible for the development and implementation of Visibility Materials.',
+      ],
+    },
+  ],
+};
+```
+
+The next step will be to add the fields to the `Query.ts` file.
+We will add two important information: the type of the data and how this data is loaded, how it is resolved.
+For the type, we will mark the **type** as "Bio", which is not created yet, but we wil get to it, and for the way the data will be loaded, the **resolve** we will add an arrow asynchronous (optionally) function.
+The resolver may receive 3 arguments.
+The parent is one of them. For the base query, the parent will be _root_.
+The next will be "args".
+And finally, the context ("ctx"). That's where we have the connection to the databases, authentication restrictions and such.
+
+Since we don't need all of that in this part, we will just add a simple arrow function, that will bring the data from the `data.ts` file.
+After importing "Bio" from the "index", it will be something like this:
+
+```javascript
+import { queryType } from '@nexus/schema';
+import { data } from 'src/data';
+import { Bio } from './index';
+
+export const Query = queryType({
+  definition(t) {
+    t.field('bio', {
+      type: Bio,
+      resolve: () => data.bio,
+    });
+  },
+});
+```
+
+Inside the allTypes folder, we create the `Bio.ts` file.
+Now we can declare the types!
+To do that, we will import the "objectType" form "@nexus/schema" and define all of the different fields this data has.
+
+Since we are just accessing a property, there's no need to declare a resolver.
+
+Inside the `Bio.ts` we will have:
+
+```javascript
+import { objectType } from '@nexus/schema';
+
+export const Bio = objectType({
+  name: 'Bio',
+  definition(t) {
+    t.string('name');
+    t.string('tagline');
+    t.string('email');
+    t.string('objective');
+    t.url('github', (bio) => new URL(bio.github));
+    t.url('website', (bio) => new URL(bio.website));
+    t.url('linkedin', (bio) => new URL(bio.linkedin));
+  },
+});
+```
+
+And that will be exported by adding "export \* from "./Bio" to the `index.ts` file inside the allTypes folder:
+
+```javascript
+export * from './Query';
+export * from './Bio';
+```
+
+The query should be working now.
+In the link http://localhost:3000/api/graphql, there should be possible to query the name, for example, inside the query.
+
+For the URLs, we have to create a new URL element. This is a new type that we have to add.
+
+To do that, we will import "decorateType" and "GraphQLURL" inside the `index.ts` file from the "allTypes" folder. Another type we will have to create is "GraphQLDate", so this will also be imported.
+
+After that, we will define the scalars, determining which types are going to be decorated with those scalars.
+This is the result inside the `index.ts` file, from the "allTypes" folder:
+
+```javascript
+import { decorateType } from '@nexus/schema';
+import { GraphQLDate, GraphQLURL } from 'graphql-scalars';
+
+export const GQLDate = decorateType(GraphQLDate, {
+  rootTyping: 'Date',
+  asNexusMethod: 'date',
+});
+
+export const GQLURL = decorateType(GraphQLURL, {
+  rootTyping: 'URL',
+  asNexusMethod: 'url',
+});
+```
+
+Now we will have to give Nexus a little more information about the types we are working with.
+
+The first step will be to create a folder named "generated" where we will generate all the types that nexus will be using.
+
+On the `schema.ts` file, we will set an output, where there will be a schema.
+This **schema** will use "path.join" (that we will have to import). This schema will receive the path of the "schema.graphql" file, that Apollo wants us to type by hand, but if there is a way to automate it, it's better.
+The other part part of the output will be **typegen**, that will receive a similar argument of path, but to get the "nexus.ts" file inside the "generated" folder.
+
+When this runs, the file will be created automatically, bringing of the typeScript type definitions.
+
+The final file will be:
+
+```javascript
+import { makeSchema } from '@nexus/schema';
+import path from 'path';
+import * as types from './allTypes';
+
+export const schema = makeSchema({
+  types,
+  outputs: {
+    schema: path.join(process.cwd(), 'schema.graphql'),
+    typegen: path.join(process.cwd(), 'src', 'generated', 'nexus.ts'),
+  },
+});
+```
+
+To fix the problem of the links not being recognized, we will create a file called `interfaces.ts` inside the "src" folder, where we will declare som types for the BioInterface.
+We can also add this information about the PositionInterface.
+The file will be like this:
+
+```javascript
+export interface BioInterface {
+  name: string;
+  tagline: string;
+  email: string;
+  github: string;
+  website: string;
+  linkedin: string;
+  objective: string;
+}
+
+export interface PositionInterface {
+  id: string;
+  title: string;
+  company: string;
+  startDate: string;
+  endDate?: string;
+  location: string;
+  achievements: string[];
+}
+```
+
+Even though we declare the websites as strings, this is still correct because they started as strings and were converted to URLs later.
+
+For the "id", we might have to declare as an integer, depending on the source.
+The field "endDate" will be set as a conditional, because it may or may not exist.
+Finally, for the achievements, the type will be set as an array of strings.
+
+With the interfaces defined, we have to tell Nexus where to find this information and knows that it is working with.
+We can do that by going back to the `schema.ts` file and adding **typegenAutoConfig** to the schema. Here, we declare possible sources from where to load the type information from.
+Here we could import information from "prisma", if working with a database, or, in our case, locally.
+Inside those sources, we declare an "alias", the exact "source" to the type file and a "typeMatch", where we declare exactly how the types will be interpreted. In our case, it will be a regex with the word "Interface".
+
+Another useful thing we can add is the **backingTypeMap**, that basically sets some default types for some common cases.
+This can be hard to debug, but can be really useful sometimes. In our case, we can use "date" and "url" as default properties.
+
+To avoid some issues, we can add, at last, a **debug** property, that will create outputs only on development environment.
+
+This setup might look too much, but we only have to set this once, and after that, we will have a "type safe" application.
+
+The file will be like this in the end:
+
+```javascript
+import { makeSchema } from '@nexus/schema';
+import path from 'path';
+import * as types from './allTypes';
+
+export const schema = makeSchema({
+  types,
+  outputs: {
+    schema: path.join(process.cwd(), 'schema.graphql'),
+    typegen: path.join(process.cwd(), 'src', 'generated', 'nexus.ts'),
+  },
+  typegenAutoConfig: {
+    sources: [
+      {
+        alias: 'faces',
+        source: path.join(process.cwd(), 'src', 'interfaces.ts'),
+        typeMatch: (type) => new RegExp(`(${type}Interface)`),
+      },
+    ],
+    backingTypeMap: {
+      Date: 'Date',
+      URL: 'URL',
+    },
+    debug: process.env.NODE_ENV === 'development',
+  },
+});
+```
+
+Now, for the positions part, we will add a file named `Positions.ts` inside the "allTypes" folder and fill it up similarly to the "Bio.ts" file.
+The most notable difference is with dates. That part will need resolving, since the original information is a string, so it has to be converted to a date.
+For the endDate, we will have to add a ternary operator to check if the information exists, since it is a nullable field.
+
+Another important date related field is about the time in a position. For that, we will add a function that deals with this calculation.
+
+The file will look like this:
+
+```javascript
+import { objectType } from '@nexus/schema';
+import { differenceInYears, differenceInMonths } from 'date-fns';
+
+export const Position = objectType({
+  name: 'Position',
+  definition(t) {
+    t.id('id');
+    t.string('title');
+    t.string('company');
+    t.string('location');
+    t.date('startDate', {
+      description: 'When I started at this position',
+      resolve: (position) => new Date(position.startDate),
+    });
+    t.date('endDate', {
+      nullable: true,
+      resolve: (position) =>
+        position.endDate ? new Date(position.endDate) : null,
+    });
+    t.int('years', ({ endDate, startDate }) =>
+      differenceInYears(
+        endDate ? new Date(endDate) : new Date(),
+        new Date(startDate)
+      )
+    );
+    t.int(
+      'months',
+      ({ endDate, startDate }) =>
+        differenceInMonths(
+          endDate ? new Date(endDate) : new Date(),
+          new Date(startDate)
+        ) % 12
+    );
+    t.list.string('achievements', (position) => position.achievements);
+  },
+});
+```
+
+However, we still cannot use these fields for two reasons.
+
+The first is because we need to export "Position" on the `index.ts` file inside the "allTypes" folder.
+So:
+
+```javascript
+export * from './Position';
+```
+
+And the second is because we didn't give a way for the query to find the positions. That information will be added to the `Query.ts` file, on which we will import the positions and declare its types and its resolves.
+
+```javascript
+import { queryType, idArg } from '@nexus/schema';
+import { data } from 'src/data';
+import { Bio, Position } from './index';
+
+export const Query = queryType({
+  definition(t) {
+    t.field('bio', {
+      type: Bio,
+      resolve: () => data.bio,
+    });
+
+    t.list.field('positions', {
+      type: Position,
+      resolve: () => data.positions,
+    });
+  },
+});
+```
+
+Another way we can use this part is giving arguments to the field. So, if we wanted to find a position using ID, we could do something like this:
+
+```javascript
+t.field('position', {
+  type: Position,
+  description: 'Find a position by its ID',
+  nullable: true,
+  args: { id: idArg() },
+  resolve: (root, { id }: { id: string }, ctx) =>
+    data.positions.find((position) => position.id === id),
+});
+```
+
+To use this, we will need to import **idArg**:
+
+```javascript
+import { queryType, idArg } from '@nexus/schema';
+```
+
+And with that we finish the backend of out application.
+On the GraphQL Playground it is possible to test the different results and to see information about the different variables, with the descriptions set for different types, inside the "allTypes" folder.
+
+### Frontend
+
+- index.js -> tsx: cleanup
+- _app.js -> tsx: wrapper. Props and ApolloProvider. Create hook.
+- src/apolloClient: ApolloClient hook. Memory cache. Initialize Apollo. Next examples. New function createApolloClient. Run if not apolloClient.
+- index.tsx: import useQuery and gql from '@apollo/client". Create const with {data, error, loading}. Manage error.
+- index.tsx: start organizing the react page. Formatting the different parts of data. Website link, github page. After that, experience. Format date. Create variable to deal with the years and months. Different achievements mapped. Syntax highlighter to make the graphql schema beautiful. Change style. Print from graphql/printer.
+
+
+
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
+.
 
 ## Deployment
 
-A aplicação foi subida na internet usando o gh-pages.
-Para fazê-lo, basta estar com os arquivos _index.html_, _style.css_ e _script.js_ dentro de um repositório aberto no Github e, em **Configurações**, buscar a opção **Github Pages**.
-Nesta seção, basta escolher a branch a ser utilizada e salvar.
-Em alguns minutos a aplicação deve estar disponível numa url como a abaixo:
-
-> https://dev-pratico.github.io/projeto-gerador_de_imgs_placeholder/
-
-## Construído com
+## Built with
 
 - [Visual Studio Code](https://code.visualstudio.com/) - The editor
-- HTML5 Canvas
+- ReactJs
+- NextJs
+- Apollo Server
+- Apollo Client
+- GraphQL
 
-## Autores
+## Authors
 
 - **Sthefano Carvalho** - [SthefanoC](https://github.com/sthefanoc)
+
+## Acknowledgments
+
+This project was inspired by a 2 video tutorial from [Leigh Halliday](https://github.com/leighhalliday/).
+
+The videos:
+
+- [Backend](https://youtu.be/_HOp7hBEjp8)
+- [Frontend](https://youtu.be/ZFTRyuLwqdQ)
+
+The code:
+
+- [Github Repo](https://github.com/leighhalliday/graphql-resume)

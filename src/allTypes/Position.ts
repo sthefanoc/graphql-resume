@@ -13,6 +13,7 @@ export const Position = objectType({
       resolve: (position) => new Date(position.startDate),
     });
     t.date("endDate", {
+      description:"The date that I started working at this position. It is nullable, since I can still be working on a determined position.",
       nullable: true,
       resolve: (position) =>
         position.endDate ? new Date(position.endDate) : null,

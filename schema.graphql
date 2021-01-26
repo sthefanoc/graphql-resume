@@ -20,6 +20,10 @@ scalar Date
 type Position {
   achievements: [String!]!
   company: String!
+
+  """
+  The date that I started working at this position. It is nullable, since I can still be working on a determined position.
+  """
   endDate: Date
   id: ID!
   location: String!
