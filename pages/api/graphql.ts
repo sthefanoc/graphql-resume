@@ -3,6 +3,7 @@ import { schema } from "src/schema";
 
 const server = new ApolloServer({ 
   schema,
+  introspection: true,
   playground: true
  });
 const handler = server.createHandler({ path: "/api/graphql" });
