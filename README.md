@@ -535,12 +535,10 @@ On the GraphQL Playground it is possible to test the different results and to se
 ### Frontend
 
 - index.js -> tsx: cleanup
-- _app.js -> tsx: wrapper. Props and ApolloProvider. Create hook.
+- \_app.js -> tsx: wrapper. Props and ApolloProvider. Create hook.
 - src/apolloClient: ApolloClient hook. Memory cache. Initialize Apollo. Next examples. New function createApolloClient. Run if not apolloClient.
 - index.tsx: import useQuery and gql from '@apollo/client". Create const with {data, error, loading}. Manage error.
 - index.tsx: start organizing the react page. Formatting the different parts of data. Website link, github page. After that, experience. Format date. Create variable to deal with the years and months. Different achievements mapped. Syntax highlighter to make the graphql schema beautiful. Change style. Print from graphql/printer.
-
-
 
 .
 .
