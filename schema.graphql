@@ -4,18 +4,36 @@
 
 type Bio {
   email: String!
-  github: URL!
-  linkedin: URL!
+  location: String!
   name: String!
   objective: String!
+  shortDescription: String!
   tagline: String!
-  website: URL!
+  website: String!
 }
 
 """
 A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
 """
 scalar Date
+
+type Education {
+  """When I finished/ left this course."""
+  endDate: Date
+  id: ID!
+  institution: String!
+  shortDescription: String!
+
+  """When I started this course"""
+  startDate: Date!
+  title: String!
+}
+
+type Language {
+  id: ID!
+  level: String!
+  name: String!
+}
 
 type Position {
   achievements: [String!]!
@@ -35,12 +53,54 @@ type Position {
   years: Int!
 }
 
+type Project {
+  githubRepo: String!
+  id: ID!
+  liveProject: String!
+  shortDescription: String!
+  technologies: [String!]!
+  title: String!
+}
+
 type Query {
   bio: Bio!
+
+  """Find a education by its ID"""
+  education(id: ID): Education
+  educations: [Education!]!
+
+  """Find a language by its ID"""
+  language(id: ID): Language
+  languages: [Language!]!
 
   """Find a position by its ID"""
   position(id: ID): Position
   positions: [Position!]!
+
+  """Find a project by its ID"""
+  project(id: ID): Project
+  projects: [Project!]!
+
+  """Find a socialLink by its ID"""
+  socialLink(id: ID): SocialLink
+  socialLinks: [SocialLink!]!
+  technologies: [Technology!]!
+
+  """Find a technology by its ID"""
+  technology(id: ID): Technology
+}
+
+type SocialLink {
+  icon: String!
+  id: ID!
+  name: String!
+  url: URL!
+}
+
+type Technology {
+  icon: String!
+  id: ID!
+  name: String!
 }
 
 """

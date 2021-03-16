@@ -1,13 +1,14 @@
 .header {
   text-align: center;
   padding: 2rem 0;
-  background-color: #bbdefb;
+  background-color: #2196f3;
+  color: #fff;
 }
 
 .light {
   margin: 0.25rem 0;
   font-size: 0.9rem;
-  color: #607d8b;
+  color: #fff;
 }
 
 .split {
@@ -35,5 +36,16 @@
   }
   .right {
     width: 100%;
+  }
+}
+
+@media print {
+  .left {
+    display: none;
+  }
+  .right {
+    width: 100%;
+    padding: 0;
+    margin: 0;
   }
 }

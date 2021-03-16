@@ -1,14 +1,15 @@
 import { objectType } from "@nexus/schema";
+import { data } from "src/data";
 
 export const Bio = objectType({
   name: "Bio",
   definition(t) {
     t.string("name");
     t.string("tagline");
+    t.string("location");
     t.string("email");
+    t.string("website");
     t.string("objective");
-    t.url("github", (bio) => new URL(bio.github));
-    t.url("website", (bio) => new URL(bio.website));
-    t.url("linkedin", (bio) => new URL(bio.linkedin));
+    t.string("shortDescription");
   },
 });

@@ -41,8 +41,13 @@ export interface NexusGenScalars {
 
 export interface NexusGenRootTypes {
   Bio: faces.BioInterface;
+  Education: faces.EducationInterface;
+  Language: faces.LanguageInterface;
   Position: faces.PositionInterface;
+  Project: faces.ProjectInterface;
   Query: {};
+  SocialLink: faces.SocialLinkInterface;
+  Technology: faces.TechnologyInterface;
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
@@ -58,12 +63,25 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 export interface NexusGenFieldTypes {
   Bio: { // field return type
     email: string; // String!
-    github: NexusGenScalars['URL']; // URL!
-    linkedin: NexusGenScalars['URL']; // URL!
+    location: string; // String!
     name: string; // String!
     objective: string; // String!
+    shortDescription: string; // String!
     tagline: string; // String!
-    website: NexusGenScalars['URL']; // URL!
+    website: string; // String!
+  }
+  Education: { // field return type
+    endDate: NexusGenScalars['Date'] | null; // Date
+    id: string; // ID!
+    institution: string; // String!
+    shortDescription: string; // String!
+    startDate: NexusGenScalars['Date']; // Date!
+    title: string; // String!
+  }
+  Language: { // field return type
+    id: string; // ID!
+    level: string; // String!
+    name: string; // String!
   }
   Position: { // field return type
     achievements: string[]; // [String!]!
@@ -76,16 +94,60 @@ export interface NexusGenFieldTypes {
     title: string; // String!
     years: number; // Int!
   }
+  Project: { // field return type
+    githubRepo: string; // String!
+    id: string; // ID!
+    liveProject: string; // String!
+    shortDescription: string; // String!
+    technologies: string[]; // [String!]!
+    title: string; // String!
+  }
   Query: { // field return type
     bio: NexusGenRootTypes['Bio']; // Bio!
+    education: NexusGenRootTypes['Education'] | null; // Education
+    educations: NexusGenRootTypes['Education'][]; // [Education!]!
+    language: NexusGenRootTypes['Language'] | null; // Language
+    languages: NexusGenRootTypes['Language'][]; // [Language!]!
     position: NexusGenRootTypes['Position'] | null; // Position
     positions: NexusGenRootTypes['Position'][]; // [Position!]!
+    project: NexusGenRootTypes['Project'] | null; // Project
+    projects: NexusGenRootTypes['Project'][]; // [Project!]!
+    socialLink: NexusGenRootTypes['SocialLink'] | null; // SocialLink
+    socialLinks: NexusGenRootTypes['SocialLink'][]; // [SocialLink!]!
+    technologies: NexusGenRootTypes['Technology'][]; // [Technology!]!
+    technology: NexusGenRootTypes['Technology'] | null; // Technology
+  }
+  SocialLink: { // field return type
+    icon: string; // String!
+    id: string; // ID!
+    name: string; // String!
+    url: NexusGenScalars['URL']; // URL!
+  }
+  Technology: { // field return type
+    icon: string; // String!
+    id: string; // ID!
+    name: string; // String!
   }
 }
 
 export interface NexusGenArgTypes {
   Query: {
+    education: { // args
+      id?: string | null; // ID
+    }
+    language: { // args
+      id?: string | null; // ID
+    }
     position: { // args
+      id?: string | null; // ID
+    }
+    project: { // args
+      id?: string | null; // ID
+    }
+    socialLink: { // args
+      id?: string | null; // ID
+    }
+    technology: { // args
       id?: string | null; // ID
     }
   }
@@ -96,7 +158,7 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Bio" | "Position" | "Query";
+export type NexusGenObjectNames = "Bio" | "Education" | "Language" | "Position" | "Project" | "Query" | "SocialLink" | "Technology";
 
 export type NexusGenInputNames = never;
 
