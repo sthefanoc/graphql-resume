@@ -227,6 +227,12 @@ export default function Home() {
                                                 <i className="fas fa-cloud-download-alt"></i> Download Resumè
                                             </button>
                                           </li>
+                                          <li>
+                                              {/* <button className="side-btn" onClick={printPDF}><i className="fas fa-cloud-download-alt"></i> Download Resume</button> */}
+                                              <button className="side-btn" onClick={()=>{window.open("https://sthefanoc.com/projects")}}>
+                                                <i className="fas fa-laptop-code"></i> My work
+                                            </button>
+                                          </li>
                                       </ul>
                                   </div>
                               </div>
@@ -240,8 +246,8 @@ export default function Home() {
                                                 <h6>{project.title}</h6>
                                             </a>
                                             <p>{project.shortDescription}</p>
-                                            <a href=""><b>Github: </b>{project.githubRepo.replace("https://github.com/",".../")}</a>
-                                            <a href=""><b>Live: </b>{project.liveProject.replace("https://","")}</a>
+                                            <a href={project.githubRepo} target="blank"><b><i className="fab fa-github"></i> </b>{project.githubRepo.replace("https://github.com/",".../")}</a>
+                                            <a href={project.liveProject} target="blank"><b><i className="fas fa-laptop"></i> </b>{project.liveProject.replace("https://","")}</a>
                                           </div>
                                           <ul className="project-technologies">
                                             {project.technologies.map((tech) => (
@@ -256,7 +262,7 @@ export default function Home() {
                                     ))}
                               </ul>
 
-                              <h2 className="rit-titl"><i className="fas fa-briefcase"></i> Work Experience</h2>
+                              <h2 className="rit-titl pagebreak"><i className="fas fa-briefcase"></i> Work Experience</h2>
                               <ul className="work-exp">
                                   {positions.map((position) => {
                                       const length = [
@@ -298,6 +304,7 @@ export default function Home() {
                                               <span>{`${education.startDate.split('-')[0]}-${education.endDate.split('-')[0]}`}</span> 
                                               
                                               <p><b>{education.title}</b> / {education.institution}</p>
+                                              <p>{education.shortDescription}</p>
                                           </li>
                                       ))}
                                   </ul>

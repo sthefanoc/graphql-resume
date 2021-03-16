@@ -100,15 +100,15 @@ export const data = {
       id: 'education01',
       title: "Bootcamp Python & React Js",
       institution: "DIO",
-      shortDescription:"",
+      shortDescription:"Two bootcamps to accelerate my understanding about the tools I already worked with.",
       startDate: '2020-03-01',
       endDate: "2020-07-01",
     },
     {
       id: 'education02',
       title: "Growth Marketing Minidegree",
-      institution: "CXL Institute",
-      shortDescription:"",
+      institution: "CXL",
+      shortDescription:"Study about growth marketing principles and techniques. Ads, Content, SEO, etc.",
       startDate: '2020-03-01',
       endDate: "2020-08-01",
     },
@@ -116,15 +116,15 @@ export const data = {
       id: 'education03',
       title: "Computer Science (incomplete)",
       institution: "UFABC",
-      shortDescription:"",
+      shortDescription:"Interrupted studies on Computer Science. Algorithms, Programming logic, Mathematics.",
       startDate: '2018-02-01',
       endDate: "2019-12-01",
     },
     {
       id: 'education04',
       title: "Economics",
-      institution: "Mackenzie",
-      shortDescription:"",
+      institution: "Universidade Mackenzie",
+      shortDescription:"Studies on Statistics, Econometrics and History.",
       startDate: '2010-01-01',
       endDate: "2014-06-01",
     }
@@ -135,7 +135,7 @@ export const data = {
       title: "SthefanoC.com",
       githubRepo: "https://github.com/sthefanoc/sthefanoc.com",
       liveProject: "https://sthefanoc.com/",
-      shortDescription:"Personal website that serves as a resumè and I where I can showcase my projects.",
+      shortDescription:"Personal website that serves as a resumè and I where I can showcase my projects. The website is deployed on Netlify.",
       technologies: [
         'ReactJS: to build pages and components',
         'GatsbyJs: for Static Site Generation',
@@ -148,7 +148,7 @@ export const data = {
       title: "Press.Masteradin.com",
       githubRepo: "https://github.com/sthefanoc/masteradin-press-frontend",
       liveProject: "https://press.masteradin.com/",
-      shortDescription:"Website to share press releases with different journalists.",
+      shortDescription:"Website to share press releases with different journalists. It has authentication, allows users to follow profiles and comment on articles.",
       technologies: [
         'NextJS: for SEO friendly website and React syntax',
         'NodeJs and Express: for backend with authentication',
@@ -158,28 +158,27 @@ export const data = {
     },
     {
       id: 'project03',
-      title: "Drive.Masteradin.com",
+      title: "Resume.SthefanoC.com",
       githubRepo: "https://github.com/sthefanoc/graphql-resume",
       liveProject: "https://resume.sthefanoc.com/",
-      shortDescription:"Resumé build using NextJs, GraphQL and TypeScript.",
+      shortDescription:"Website to showcase my CV build using NextJs, GraphQL and TypeScript.",
       technologies: [
         'TypeScript: to build a type safe application',
-        'NextJS: for React syntax and performance',
+        'NextJS: for React syntax and SEO performance',
         'GraphQL: to query resumè data',
         "ApolloServer: to serve the application"
       ]
     },
     {
       id: 'project04',
-      title: "WhatsApp Tools",
+      title: "WhatsApp Tools (chrome extension)",
       githubRepo: "https://github.com/sthefanoc/sthefanoc.com",
-      liveProject: "https://sthefanoc.com/whatsapptools",
+      liveProject: "https://sthefanoc.com/WhatsappTools",
       shortDescription:"Personal website that serves as a resumè and I where I can showcase my projects.",
       technologies: [
-        'ReactJS:to build pages and components',
-        'GatsbyJs: for Static Site Generation',
-        'Wordpress Headless CMS: as backend',
-        'GraphQL: to query different data'
+        'HTML&CSS: to build and style the interface',
+        'JavaScript: for functionality',
+        'Chrome Store: to push to production',
       ]
     },
   ],

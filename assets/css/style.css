@@ -123,6 +123,9 @@ body {
   font-family: 'mouse-300', Arial, Helvetica, sans-serif;
   color: #6a6a6a;
 }
+h4{
+  margin-top: 10px;
+}
 
 .session-title {
   padding: 30px;
@@ -361,7 +364,7 @@ body {
   flex-direction: column;
 }
 .profile-box .left-side .social-link li {
-  padding: 10px 0px;
+  padding: 10px 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -503,8 +506,9 @@ button:focus{
   display: flex;
   flex-direction: row;
   white-space: nowrap;
-  width: 80%;
-  justify-content: start;
+  width: 90%;
+  justify-content: space-around;
+  margin-bottom: 15px;
 }
 .btn-link li{
   margin-right: 10px;
@@ -535,14 +539,14 @@ button:focus{
 }
 
 .rit-cover .projects{
-  padding: 20px 0px;
+  padding: 0px 0px 20px;
 }
 .rit-cover .projects li {
   box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
     0 1px 5px 0 rgba(0, 0, 0, 0.12);
   border-radius: 2px;
-  background-color: #ecebeb3d;
-  padding: 10px 15px;
+  /* background-color: #ecebeb3d; */
+  padding: 5px 15px;
   font-size: 0.9rem;
   display: flex;
   flex-direction: row;
@@ -551,16 +555,18 @@ button:focus{
 .rit-cover .projects li a{
   color: #3f3f3f;
   font-size: 0.8rem;
+  white-space: nowrap;
 }
 .rit-cover .projects li .project-description,
 .rit-cover .projects li .project-technologies{
-  width: 45%;
+  max-width: 45%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
 .rit-cover .projects li .project-technologies li{
   box-shadow:none;
+  background-color: none;
   font-size: 0.8rem;
   font-style: italic;
   display: flex;
@@ -570,7 +576,7 @@ button:focus{
   text-align: right;
 }
 .rit-cover .projects li .project-technologies li:first-child{
-  margin-top: 20px;
+  /* margin-top: 20px; */
 }
 
 .rit-cover .work-exp .work-title {
@@ -621,6 +627,9 @@ button:focus{
 .rit-cover .education ul li span {
   font-size: 0.8rem;
 }
+.rit-cover .education ul li p:last-child{
+  margin-top: 10px;
+}
 .rit-cover .education ul li span:after{
   content: "\A";
   white-space: pre;
@@ -644,7 +653,96 @@ button:focus{
 /*# sourceMappingURL=style.css.map */
 /* Print features */
 @media print {
+  body{
+    background-color: none !important;
+  }
   a{
     text-decoration: none !important;
+  }
+  button{
+    display: none;
+  }
+  h2{
+    margin-top: 20px;
+  }
+  .projects li{
+    margin-top: 6px;
+    border:rgba(0, 0, 0, 0.12);
+    border-style: groove;
+    border-radius: 20px;
+    border-collapse: separate;
+    /* box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);   */
+  }
+  .projects li .project-technologies li{
+    border: none;
+    border-style: none;
+  }
+  .container{
+    padding-right: 0px;
+  }
+  #__next-prerender-indicator{
+    display: none;
+  }
+  .pagebreak { page-break-before: always; }
+}
+
+/* General media queries */
+
+@media screen and (max-width: 1200px){
+  .left-side{
+    margin: 0px -20px 0px -15px;
+  }
+  .icon{
+    margin: 0px -5px 0px -5px;
+  }
+  .about p, .work-exp{
+    padding-left: 10px;
+  }
+
+}
+
+@media screen and (max-width: 800px){
+  .btn-ro{
+    margin-bottom: 10px;
+  }
+  .rit-cover{
+    margin-left: 5px;
+  }
+}
+
+@media screen and (max-width: 650px){
+  .btn-ro ul{
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .projects .project-item{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    flex-wrap: wrap;
+    /* background-color: lightblue; */
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .rit-cover .projects .project-item .project-description,
+  .rit-cover .projects .project-item .project-technologies,
+  .rit-cover .projects .project-item .project-technologies li{
+    max-width: 100%;
+    width: 100%;
+    text-align: center;
+  }
+  .project-description .title,
+  .project-description p{
+    margin-bottom: 10px;
+  }
+  .work-exp .work-title{
+    flex-direction: column;
+  }
+  .work-exp .work-title h6{
+    margin: 10px 0px 10px 0px;
+  }
+  .work-exp ul{
+    margin-top: 10px;
   }
 }
