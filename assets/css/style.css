@@ -690,6 +690,19 @@ button:focus{
 /* General media queries */
 
 @media screen and (max-width: 1200px){
+  .btn-ro .side-btn{
+    width: 45%;
+  }
+  .about .btn-ro .side-btn{
+    width: unset;
+    /* background-color: red; */
+  }
+  .btn-ro{
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
   .left-side{
     margin: 0px -20px 0px -15px;
   }
@@ -703,9 +716,6 @@ button:focus{
 }
 
 @media screen and (max-width: 800px){
-  .btn-ro{
-    margin-bottom: 10px;
-  }
   .rit-cover{
     margin-left: 5px;
   }

@@ -5,8 +5,6 @@ import { print } from "graphql/language/printer";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import prismStyle from "react-syntax-highlighter/styles/prism/xonokai";
 import styles from "../styles/Home.module.css";
-import ReactDOMServer from "react-dom/server";
-import jsPDF from 'jspdf';
 
 const ResumeQuery = gql`
 query SthefanoCResume{
@@ -66,15 +64,10 @@ query SthefanoCResume{
 `;
 
 export default function Home() {
-
-    const printPDF = () => {
-        console.log('printed')
-    }
-
   const { data, error, loading } = useQuery(ResumeQuery);
 
   if (error) {
-      console.log(error)
+      console.log('this is the error:',error)
     return <span>Error... oops!</span>;
   }
 
@@ -222,13 +215,11 @@ export default function Home() {
                                               
                                           </li>
                                           <li>
-                                              {/* <button className="side-btn" onClick={printPDF}><i className="fas fa-cloud-download-alt"></i> Download Resume</button> */}
                                               <button className="side-btn" onClick={()=>{window.open('/SthefanoC_Resume.pdf')}}>
                                                 <i className="fas fa-cloud-download-alt"></i> Download Resumè
                                             </button>
                                           </li>
                                           <li>
-                                              {/* <button className="side-btn" onClick={printPDF}><i className="fas fa-cloud-download-alt"></i> Download Resume</button> */}
                                               <button className="side-btn" onClick={()=>{window.open("https://sthefanoc.com/projects")}}>
                                                 <i className="fas fa-laptop-code"></i> My work
                                             </button>
