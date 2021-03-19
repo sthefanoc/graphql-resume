@@ -1,13 +1,13 @@
 export const data = {
   bio: {
     name: 'Sthefano Carvalho',
-    tagline: 'Full Stack Developer',
+    tagline: 'Full-Stack Developer',
     email: 'sthefano@masteradin.com',
     website: 'https://www.sthefanoc.com',
     location: 'São Paulo-SP, Brazil',
     phoneNumber: '+55 11 987-998-135',
-    objective: 'Looking for opportunities as a Full Stack Developer.',
-    shortDescription: 'Full Stack Developer with focus on React Js for front-end, Node Js for backend, React Native for mobile, MongoDB for databases and Python for process automation and business intelligence. Experience on the industry of consumer goods, Digital Marketing (Ads, Content and Social), business management and investment analysis.',
+    objective: 'Looking for opportunities to grow as a Full-Stack Developer. Python and JavaScript are preferred, but I am open to learning new technologies.',
+    shortDescription: 'Full-Stack Developer with a focus on React Js for front-end, Node Js for backend, React Native for mobile, MongoDB for databases, and Python for process automation and business intelligence. Experience in the industry of Consumer Goods, in Digital Marketing (Ads, Content, and Social), business management, and investment analysis.',
   },
   socialLinks:[
     {
@@ -161,7 +161,7 @@ export const data = {
       title: "Resume.SthefanoC.com",
       githubRepo: "https://github.com/sthefanoc/graphql-resume",
       liveProject: "https://resume.sthefanoc.com/",
-      shortDescription:"Website to showcase my CV build using NextJs, GraphQL and TypeScript.",
+      shortDescription:"Website to showcase my CV built with NextJs, GraphQL, and TypeScript.",
       technologies: [
         'TypeScript: to build a type safe application',
         'NextJS: for React syntax and SEO performance',
@@ -174,7 +174,7 @@ export const data = {
       title: "WhatsApp Tools (chrome extension)",
       githubRepo: "https://github.com/sthefanoc/sthefanoc.com",
       liveProject: "https://sthefanoc.com/WhatsappTools",
-      shortDescription:"Personal website that serves as a resumè and I where I can showcase my projects.",
+      shortDescription:"Chrome Extension to make WhatsApp audios faster.",
       technologies: [
         'HTML&CSS: to build and style the interface',
         'JavaScript: for functionality',
@@ -185,7 +185,7 @@ export const data = {
   positions: [
     {
       id: '1',
-      title: 'Full Stack Developer',
+      title: 'Full-Stack Developer',
       company: 'SthefanoC.com',
       startDate: '2020-01-01',
       endDate: null,
@@ -193,10 +193,10 @@ export const data = {
       location: 'Remote',
       achievements: [
         'Automation Tools Development using Python',
-        'Website development using HTML, CSS and Javascript',
-        'Frontend Development using ReactJs, GatsbyJS, NextJS and Redux',
-        'Backend Development using NodeJs, Express, Django, Flask and Firebase',
-        'Hybrid App Development using React Native (Android & IOs) and PWA',
+        'Website development using HTML, CSS, and Javascript',
+        'Frontend Development using ReactJs, GatsbyJS, NextJS, and Redux',
+        'Backend Development using NodeJs, Express, Django, Flask, and Firebase',
+        'Hybrid App Development using React Native (Android & IOs), and PWA',
       ],
     },
     {
