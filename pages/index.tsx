@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import Head from "next/head";
 import { useQuery, gql } from "@apollo/client";
 import { format } from "date-fns";
@@ -65,10 +66,22 @@ query SthefanoCResume{
 
 export default function Home() {
   const { data, error, loading } = useQuery(ResumeQuery);
+    
 
   if (error) {
-      console.log('this is the error:',error)
-    return <span>Error... oops!</span>;
+      useEffect(() => {
+        setTimeout(()=>{
+            window.alert("You will be redirected to the home page.")
+            window.location.href = "https://sthefanoc.com/"
+        }, 3000)
+      }, [])
+      
+      
+    return (
+    <header className={styles.header}>
+        <h1>An error ocurred</h1>
+        <p>You will be redirected to the home page</p>
+    </header>);
   }
 
   if (loading) {

@@ -538,45 +538,31 @@ On the GraphQL Playground it is possible to test the different results and to se
 
 ### Frontend
 
-- index.js -> tsx: cleanup
-- \_app.js -> tsx: wrapper. Props and ApolloProvider. Create hook.
-- src/apolloClient: ApolloClient hook. Memory cache. Initialize Apollo. Next examples. New function createApolloClient. Run if not apolloClient.
-- index.tsx: import useQuery and gql from '@apollo/client". Create const with {data, error, loading}. Manage error.
-- index.tsx: start organizing the react page. Formatting the different parts of data. Website link, github page. After that, experience. Format date. Create variable to deal with the years and months. Different achievements mapped. Syntax highlighter to make the graphql schema beautiful. Change style. Print from graphql/printer.
+For the front-end, it really depends on what kind of template you will use. I have used a template from [Smart Eye website](https://www.smarteyeapps.com/free-personal-website-resume-website-profile-website) and adapted it to my data.
 
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
+The general steps to be followed are:
+
+- ON the `index.js` -> convert it to `tsx` and cleanup, besides adding relevant data to the "Head" tag, like favicon, language, and title.
+- On the `pages\_app.js` -> convert it to `tsx`. This will the wrapper around the whole application. This is where we import what we want to have access on every single page. We will wrap the whole and on a **ApolloProvider** and create hook, **useApollo()** to initialize our provider.
+- Create a `src/apolloClient.ts`: **ApolloClient** hook. InMemoryCache. ApolloClient, HttpLink, NormalizedCacheObject. Next examples. New function createApolloClient. Run if not apolloClient.
+- On the `index.tsx`: import **useQuery** and gql from '@apollo/client". Create const with {data, error, loading}. Manage error.
+- On `index.tsx`: start CV layout. Formatting the different parts of data. Website link, github page, experience, date formats(create variable to deal with the years and months). Map different items of education and projects. And finally, use Syntax highlighter to make the graphql schema beautiful. Change style. Print from graphql/printer.
+
 
 ## Deployment
 
 ## Built with
 
-- [Visual Studio Code](https://code.visualstudio.com/) - The editor
-- ReactJs
-- NextJs
-- Apollo Server
-- Apollo Client
-- GraphQL
+- [Visual Studio Code](https://code.visualstudio.com/) - for editing
+- [Vercel](https://vercel.com/) - for deployment
+- [Hostinger](https://www.hostinger.com.br/) - for managing domains
+- [ReactJs](https://reactjs.org/) - for building components and logic
+- [NextJs](https://nextjs.org/) - for dynamic SSG
+- [Apollo Server](https://www.apollographql.com/docs/apollo-server/) - for self-documenting GraphQL API
+- [Apollo Client](https://www.apollographql.com/docs/react/) - for state management
+- [GraphQL](https://graphql.org/) - to query data
+- [Date-Fns](https://date-fns.org/) - to deal with formatting dates
+- [React Syntax Highlighter](https://github.com/react-syntax-highlighter/react-syntax-highlighter) - for bringing the correct formats for the front-end
 
 ## Authors
 
@@ -591,6 +577,10 @@ The videos:
 - [Backend](https://youtu.be/_HOp7hBEjp8)
 - [Frontend](https://youtu.be/ZFTRyuLwqdQ)
 
-The code:
+The original source code:
 
 - [Github Repo](https://github.com/leighhalliday/graphql-resume)
+
+The front-end part is built on a CV template found on SmartEye website:
+
+- [Free Personal, Profile, Resume HTML Website Template](https://www.smarteyeapps.com/free-personal-website-resume-website-profile-website)
