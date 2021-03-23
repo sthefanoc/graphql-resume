@@ -1,15 +1,19 @@
-# GraphQL Resumé with Next.Js, Apollo Server and Nexus Schema
+<h1 align="center">GraphQL Resumé with Next.Js, Apollo Server and Nexus Schema</h1>
+
+<p align="center">
+  <img width="100%" alt="GraphQL Resumé with Next.Js" src="/assets/repo/Resume.SthefanoC.com- CV - Header.png">
+</p>
 
 Personal GraphQL API to be used to build resumés online.
 This is built using **Next.Js** and for the schema, **Nexus Schema**.
 It is possible to access all the information using the **GraphQL API**, that comes with its playground as seen on the image below.
 
 The API can be used by anyone on the deployed link:
-<a href="https://graphqlresume.sthefanoc.com">production app</a>
+<a href="https://resume.sthefanoc.com">SthefanoC Resumé Production App</a>
 
 ### Preview:
 
-<div style="text-align:center"><a href="https://dev-pratico.github.io/projeto-gerador_de_imgs_placeholder/" target="_blank"><img height="400" src="assets/imgs_placeholder.GIF" title="GraphQL resume" alt="Project Placeholder Images" /></a></div>
+<div style="text-align:center"><a href="https://resume.sthefanoc.com/" target="_blank"><img height="400" src="assets/repo/ResumeSthefanoCCom.webm" title="GraphQL resume" alt="SthefanoC GraphQL Resumé" /></a></div>
 
 ### Technologies involved:
 
