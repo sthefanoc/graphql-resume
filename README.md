@@ -13,7 +13,7 @@ The API can be used by anyone on the deployed link:
 
 ### Preview:
 
-<div style="text-align:center"><a href="https://resume.sthefanoc.com/" target="_blank"><img height="400" src="assets/repo/ResumeSthefanoCCom.webm" title="GraphQL resume" alt="SthefanoC GraphQL Resumé" /></a></div>
+<div style="text-align:center"><a href="https://resume.sthefanoc.com/" target="_blank"><img height="400" src="assets/repo/ResumeSthefanoCCom.webp" title="GraphQL resume" alt="SthefanoC GraphQL Resumé" /></a></div>
 
 ### Technologies involved:
 
