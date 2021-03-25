@@ -72,7 +72,7 @@ export default function Home() {
       useEffect(() => {
         setTimeout(()=>{
             window.alert("You will be redirected to the home page.")
-            window.location.href = "https://sthefanoc.com/"
+            window.location.href = "https://www.sthefanoc.com/"
         }, 3000)
       }, [])
       
@@ -115,7 +115,7 @@ export default function Home() {
               <button className="side-btn" onClick={()=>{window.open("/api/graphql")}}>
                 <i className="fas fa-code"></i> GraphQL API Playground
               </button>
-              <button className="side-btn" onClick={()=>{window.open("https://sthefanoc.com/about")}}>
+              <button className="side-btn" onClick={()=>{window.open("https://www.sthefanoc.com/about")}}>
               <i className="fas fa-user"></i> More about me
               </button>
           </div>
@@ -222,7 +222,7 @@ export default function Home() {
                                       <ul className="btn-link">
                                           <li>
                                               {/* <button className="side-btn" onClick={() => {console.log('aaaaaaa')}}><i className="fas fa-paper-plane"></i> Hire Me</button> */}
-                                              <button className="side-btn" onClick={()=>{alert("Great!\nYou'll be redirected to the contact page. Thank you.");window.open("https://sthefanoc.com/contact")}}>
+                                              <button className="side-btn" onClick={()=>{alert("Great!\nYou'll be redirected to the contact page. Thank you.");window.open("https://www.sthefanoc.com/contact")}}>
                                                 <i className="fas fa-paper-plane"></i> Hire me
                                             </button>
                                               
@@ -233,7 +233,7 @@ export default function Home() {
                                             </button>
                                           </li>
                                           <li>
-                                              <button className="side-btn" onClick={()=>{window.open("https://sthefanoc.com/projects")}}>
+                                              <button className="side-btn" onClick={()=>{window.open("https://www.sthefanoc.com/projects")}}>
                                                 <i className="fas fa-laptop-code"></i> My work
                                             </button>
                                           </li>

@@ -134,7 +134,7 @@ export const data = {
       id: 'project01',
       title: "SthefanoC.com",
       githubRepo: "https://github.com/sthefanoc/sthefanoc.com",
-      liveProject: "https://sthefanoc.com/",
+      liveProject: "https://www.sthefanoc.com/",
       shortDescription:"Personal website that serves as a resumè and I where I can showcase my projects. The website is deployed on Netlify.",
       technologies: [
         'ReactJS: to build pages and components',
@@ -173,7 +173,7 @@ export const data = {
       id: 'project04',
       title: "WhatsApp Tools (chrome extension)",
       githubRepo: "https://github.com/sthefanoc/sthefanoc.com",
-      liveProject: "https://sthefanoc.com/WhatsappTools",
+      liveProject: "https://www.sthefanoc.com/WhatsappTools",
       shortDescription:"Chrome Extension to make WhatsApp audios faster.",
       technologies: [
         'HTML&CSS: to build and style the interface',
