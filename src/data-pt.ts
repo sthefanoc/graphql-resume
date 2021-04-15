@@ -6,9 +6,9 @@ export const data = {
     website: 'https://www.sthefanoc.com',
     location: 'São Paulo-SP, Brazil',
     phoneNumber: '+55 11 987-998-135',
-    objective: 'Looking for opportunities to grow as a Full-Stack Developer. Python and JavaScript are preferred, but I am open to learning new technologies.',
-    shortDescription: 'Full-Stack Developer with a focus on React Js for front-end, Node Js for backend, React Native for mobile, MongoDB for databases, and Python for process automation and business intelligence. Experience in the industry of Consumer Goods, in Digital Marketing (Ads, Content, and Social), business management, and investment analysis.',
-    longDescription: 'Full-Stack Developer that uses code to solve problems.\r\n\r\nExperience in the Consumer Goods Industry, at Unilever, with marketing campaigns, business strategy, channel development, and process automation. \r\nAt Masteradin, a growth consultancy I co-founded, I worked with Marketing Analytics and general Page Optimization (content and technical).\r\n\r\nToday, I freelance at my own company, SthefanoC.com. The main techs on my Github page are:\r\n\r\n- Python, for general automation, scripting, web scraping, and web testing (Selenium)\r\n- HTML, CSS & JavaScript, for general web development\r\n- ReactJS, GatsbyJS, NextJS, and Redux for front-end\r\n- NodeJS, Express, Firebase, Django, and Flask for back-end\r\n- React Native and PWA for mobile (IOs & Android)\r\n\r\nA full presentation letter is available on my featured content here on LinkedIn.'
+    objective: 'Buscando oportunidades para crescer como Full-Stack Developer. Python e JavaScript são preferíveis, mas estou aberto a novas tecnologias.',
+    shortDescription: 'Desenvolvedor Full-Stack com foco em React Js para front-end, Node Js para back-end, React Native para mobile, MongoDB para databases e Python para automação de processos e inteligência de mercado. Experiência na indústria de bens de consumo, em Marketing Analytics (Ads, Content, and Social), gerenciamento de negócios e análise de investimentos.',
+    longDescription: 'Full-Stack Developer que usa c\u00F3digo para resolver problemas.\r\n\r\nExperi\u00EAncia da ind\u00FAstria de bens de consumo, na Unilever, onde trabalhei com campanhas de marketing, estrat\u00E9gia de neg\u00F3cios, desenvolvimento de canal e automa\u00E7\u00E3o de processos.\r\nNa Masteradin, uma consultoria de crescimento que eu co-fundei, trabalhei com Marketing Analytics e Otimiza\u00E7\u00E3o de P\u00E1ginas (conte\u00FAdo e t\u00E9cnico).\r\n\r\nHoje, atuo como freelancer na minha pr\u00F3pria empresa, SthefanoC.com. As principais tecnologias que podem ser vistas no meu Github s\u00E3o:\r\n\r\n- Python, para atuoma\u00E7\u00E3o, scripting, web scraping e web testing (Selenium)\r\n- HTML, CSS & JavaScript, for para desenvolvimento web\r\n- ReactJS, GatsbyJS, NextJS e Redux para front-end\r\n- NodeJS, Express, Firebase, Django e Flask para back-end\r\n- React Native and PWA para mobile (IOs & Android)\r\n\r\nUma carta de aprensenta\u00E7\u00E3o completa pode ser vista nos meus destaques, aqui no Linkedin.'
   },
   socialLinks:[
     {
@@ -45,23 +45,23 @@ export const data = {
   languages:[
     {
       id:'language01',
-      name: "English",
-      level: "Fluent/ Native"
+      name: "Inglês",
+      level: "Fluente/ Nativo"
     },
     {
       id:'language02',
-      name: "Portuguese",
-      level: "Fluent/ Native"
+      name: "Português",
+      level: "Fluente/ Nativo"
     },
     {
       id:'language03',
-      name: "Spanish",
-      level: "Advanced"
+      name: "Espanhol",
+      level: "Avançado"
     },
     {
       id:'language04',
-      name: "French",
-      level: "Intermediate"
+      name: "Francês",
+      level: "Intermediário"
     }
   ],
   priority: 1,
@@ -102,7 +102,7 @@ export const data = {
       id: 'education01',
       title: "Bootcamp Python & React Js",
       institution: "DIO",
-      shortDescription:"Two bootcamps to accelerate my understanding about the tools I already worked with.",
+      shortDescription:"Dois bootcamps realizados para aprofundar conhecimentos sobre ferramentas com as quais já trabalhava.",
       startDate: '2020-03-01',
       endDate: "2020-07-01",
     },
@@ -116,17 +116,17 @@ export const data = {
     },
     {
       id: 'education03',
-      title: "Computer Science (incomplete)",
+      title: "Ciência da Computação (incompleto)",
       institution: "UFABC",
-      shortDescription:"Interrupted studies on Computer Science. Algorithms, Programming logic, Mathematics.",
+      shortDescription:"Estudos interrompidos em Ciência da Computação. Algoritmos, Lógica de Programação, Matemática.",
       startDate: '2018-02-01',
       endDate: "2019-12-01",
     },
     {
       id: 'education04',
-      title: "Economics",
+      title: "Ciências Econômicas",
       institution: "Universidade Mackenzie",
-      shortDescription:"Studies on Statistics, Econometrics and History.",
+      shortDescription:"Estudos sobre Finanças, Estatística, Econometria e História.",
       startDate: '2010-01-01',
       endDate: "2014-06-01",
     }
@@ -137,13 +137,13 @@ export const data = {
       title: "SthefanoC.com",
       githubRepo: "https://github.com/sthefanoc/sthefanoc.com",
       liveProject: "https://www.sthefanoc.com/",
-      shortDescription:"Personal website that serves as a resumè and I where I can showcase my projects. The website is deployed on Netlify.",
+      shortDescription:"Site pessoal que serve como currículo, como playground de novos experimentos e também para mostrar os meus projetos.",
       priority: 0,
       technologies: [
-        'ReactJS: to build pages and components',
-        'GatsbyJs: for Static Site Generation',
-        'Wordpress Headless CMS: as backend',
-        'GraphQL: to query different data'
+        'ReactJS: para construir componentes',
+        'GatsbyJs: para Static Site Generation',
+        'Wordpress Headless CMS: como backend',
+        'GraphQL: para fazer query de diferentes dados',
       ]
     },
     {
@@ -151,13 +151,13 @@ export const data = {
       title: "Press.Masteradin.com",
       githubRepo: "https://github.com/sthefanoc/masteradin-press-frontend",
       liveProject: "https://press.masteradin.com/",
-      shortDescription:"Website to share press releases with different journalists. It has authentication, allows users to follow profiles and comment on articles.",
+      shortDescription:"Ferramenta para compartilhar releases de imprensa com diferentes jornalistas. Tem autenticação, permite interação com artigos e entre usuários (curtir/ seguir).",
       priority: 1,
       technologies: [
-        'NextJS: for SEO friendly website and React syntax',
-        'NodeJs and Express: for backend with authentication',
-        'MongoDB: to store data',
-        'Netlify and Heroku: for deployment'
+        'NextJS: para website um SEO friendly construído com React',
+        'NodeJs e Express: para backend com autenticação (JWT)',
+        'MongoDB: como database',
+        'Netlify e Heroku: para deployment',
       ]
     },
     {
@@ -165,13 +165,13 @@ export const data = {
       title: "Resume.SthefanoC.com",
       githubRepo: "https://github.com/sthefanoc/graphql-resume",
       liveProject: "https://resume.sthefanoc.com/",
-      shortDescription:"Website to showcase my CV built with NextJs, GraphQL, and TypeScript.",
+      shortDescription:"Website para mostrar meu Currículo. Construído com NextJs, GraphQL e TypeScript.",
       priority: 2,
       technologies: [
-        'TypeScript: to build a type safe application',
-        'NextJS: for React syntax and SEO performance',
-        'GraphQL: to query resumè data',
-        "ApolloServer: to serve the application"
+        'TypeScript: para uma type safe application',
+        'NextJS: pela sintaxe de React e a performance de SEO',
+        'GraphQL: para realizar queries dos dados do currículo',
+        'ApolloServer: para atuar como servidor da aplicação',
       ]
     },
     {
@@ -179,12 +179,12 @@ export const data = {
       title: "WhatsApp Tools (chrome extension)",
       githubRepo: "https://github.com/sthefanoc/wsp_extension",
       liveProject: "https://www.sthefanoc.com/WhatsappTools",
-      shortDescription:"Chrome Extension to make WhatsApp audios faster.",
+      shortDescription:"Extensão de Google Chrome para deixar áudios mais rápidos.",
       priority: 3,
       technologies: [
-        'HTML&CSS: to build and style the interface',
-        'JavaScript: for functionality',
-        'Chrome Store: to push to production',
+        'HTML&CSS: para construir estilos e interface',
+        'JavaScript: para funcionalidade',
+        'Chrome Store: para lançar em produção',
       ]
     },
   ],
@@ -198,11 +198,11 @@ export const data = {
       employmentType: 'PART_TIME',
       location: 'Remote',
       achievements: [
-        'Automation Tools Development using Python',
-        'Website development using HTML, CSS, and Javascript',
-        'Frontend Development using ReactJs, GatsbyJS, NextJS, and Redux',
-        'Backend Development using NodeJs, Express, Django, Flask, and Firebase',
-        'Hybrid App Development using React Native (Android & IOs), and PWA',
+        'Desenvolvimento de ferramentas de automação Python',
+        'Desenvolvimento de websites utilizando HTML, CSS e Javascript',
+        'Desenvolvimento Frontend utilizando ReactJs, GatsbyJS, NextJS e Redux',
+        'Desenvolvimento Backend utilizando NodeJs, Express, Django, Flask e Firebase',
+        'Desenvolvimento Mobile Híbrido com React Native (Android & IOs) e PWA',
       ],
     },
     {
@@ -214,11 +214,11 @@ export const data = {
       employmentType: 'FULL_TIME',
       location: 'São Paulo, Brazil',
       achievements: [
-        'Process Automation using Selenium',
-        'E-commerce website performance evaluation: technical and strategic',
-        'Business Analysis using Growth Hacking Techniques',
+        'Automação de processos com Selenium',
+        'Avaliação de performance de E-commerce: técnica e estratégica',
+        'Análise de negócio utilizando técnicas de Growth Hacking',
         'SEM (Google Ads), SEO (Content and Tech), Backlink Acquisition', 
-        'Social Media Automation (WhatsApp & Instagram)',
+        'Automação de Redes Sociais (WhatsApp & Instagram)',
       ],
     },
     {
@@ -229,12 +229,12 @@ export const data = {
       endDate: '2018-09-01',
       employmentType: 'FULL_TIME',
       location: 'São Paulo, Brazil',
-      achievements: [
-        'Website implementation',
-        'Contract Management',
-        'Investment Analysis',
-        'Financial Management',
-        'Training and Team Leadership'
+      achievements: [        
+        'Implementação de aplicação online',
+        'Gestão de contratos',
+        'Análise de Investimentos',
+        'Gestão financeira',
+        'Treinamento e liderança de equipe',
       ],
     },
     {
@@ -246,10 +246,10 @@ export const data = {
       employmentType: 'FULL_TIME',
       location: 'São Paulo, Brazil',
       achievements: [
-        'Performance KPIs',
-        'Financial Management',
-        'Strategy and relationship with Distributors',
-        'Innovation Planning'
+        'KPIs de Performance',
+        'Gestão Financeira',
+        'Estratégia e relacionamento com distribuidores',
+        'Planejamento de Inovação',
       ],
     },
     {
@@ -263,6 +263,8 @@ export const data = {
       achievements: [
         'Events and promotional campaigns and programs.',
         'Development and implementation of Visibility Materials.',
+        'Gestão de eventos, criação de campanhas e programas promocionais.',
+        'Acompanhamento de produção de materiais de visibilidade.',
       ],
     },
   ],
